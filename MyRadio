@@ -1,0 +1,50 @@
+import java.awt.*;
+import java.awt.event.*;
+
+class MyRadio extends Frame implements ItemListener
+{
+	String msg="";
+	CheckBoxGroup cbg;
+	Checkbox y,n;
+	
+	MyRadio()
+	{
+		setLayout(new FlowLayout());
+		//CheckBoxGroup object
+		cbg = new CheckBoxGroup();
+		//2 radio Buttons
+		y= new Checkbox("Yes",cbg,true);
+		n= new Checkbox("No",cbg,false);
+		Label l= new Label("Your Name",Label.CENTER);
+		TextAres ta = new TextArea(5,25);
+		//add them to frame
+		add(y);
+		add(n);
+		add(l);
+		add(ta);
+		//add IL to radio
+		y.addItemListener(this);
+		n.addItemListener(this);
+		addWindowListener(new WindowAdapter() 
+		{
+				public void windowClosing(WindowEvent we) 
+				{
+					System.exit(0);
+				}
+	    });
+	}
+
+public void paint (Graphics g)
+{
+	msg = "Current status:";
+	msg+=cbg.getSelectedCheckBox().getLabel();
+	g.drawString(msg,15,120);
+}
+public static void main(String args[])
+{
+	MyRadio b= new MyRadio();
+	b.setSize(450,450);
+	b.setTitle("Radio Button");
+	b.setVisible(true);
+}
+}
